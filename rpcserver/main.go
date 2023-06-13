@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"errors"
 	"log"
 	"net"
 	"net/rpc"
@@ -64,7 +63,7 @@ func (s *MessageService) fetchMessagesFromDB() ([]Message, error) {
 
 func main() {
 	var err error
-	db, err := sql.Open("mysql", "username:password@tcp(localhost:3306)/InstantMessagingDB")
+	db, err := sql.Open("mysql", "your-username:your-password@tcp(database:3306)/InstantMessagingDB")
 	if err != nil {
 		log.Fatal("Failed to connect to MySQL:", err)
 	}

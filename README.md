@@ -7,6 +7,7 @@ This is a simple instant messaging system implemented in Go (Golang) using an HT
 - HTTP server for handling message retrieval via a RESTful API.
 - RPC server for pulling messages via remote procedure calls.
 - Messages are stored in a MySQL database.
+- Docker support for containerization.
 
 ## Prerequisites
 
@@ -36,21 +37,14 @@ CREATE DATABASE InstantMessagingDB;
 - Open the httpserver/main.go and rpcserver/main.go files.
 - In each file, update the MySQL connection string with your MySQL username, password, and database details:
 ```go
-db, err := sql.Open("mysql", "your-username:your-password@tcp(localhost:3306)/InstantMessagingDB")
+db, err := sql.Open("mysql", "your-username:your-password@tcp(database:3306)/InstantMessagingDB")
 ```
 
 4. Build and run the servers:
 - HTTP server:
 ```shell   
-cd httpserver
-go build
-./httpserver
-```
-- RPC server:
-```shell
-cd rpcserver
-go build
-./rpcserver
+docker build -t instant-messaging-system .
+docker run -p 8080:8080 --name instant-messaging-container instant-messaging-system
 ```
 
 5. The HTTP server will be running on http://localhost:8080 and the RPC server on localhost:1234. You can now use the Pull API to fetch messages from the servers.
